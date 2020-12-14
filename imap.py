@@ -2,14 +2,25 @@ import email
 import imaplib
 from email.parser import BytesParser
 
-## TODO: Look into parse .eml files instead
+# TODO: Look into parse .eml files instead
 
 tvl_host = 'mail.tvlitho.com'
 tvl_user = 'doug@tvlitho.com'
 tvl_pass = '29phillipPi*'
 
 
-def connect_login(tvl_host, tvl_user, tvl_pass):
+def connect_to_host(tvl_host, tvl_user, tvl_pass):
+    """
+    Connect to email host and login.
+
+    Args:
+        tvl_host (str): name of host
+        tvl_user (str): username
+        tvl_pass (str): password
+
+    Returns:
+        obj: imaplib.IMAP4 object
+    """
     while True:
         #  Connect and login to host
         imap = imaplib.IMAP4(tvl_host)
@@ -26,9 +37,18 @@ def connect_login(tvl_host, tvl_user, tvl_pass):
 
 
 def parse_mail(imap):
+    """
+    Enter user inbox and search emails using given parameter(s).
+
+    Args:
+        imap (obj): imaplib.IMAP4 object
+
+    Returns:
+        str: email body
+    """
     imap.select('INBOX')  # Enter inbox
 
-    ## TODO: Search for ProTeam specific emails
+    # TODO: Search for ProTeam specific emails using input
     status, msg_count = imap.search(None, 'FROM "Debi"')
 
     for id in msg_count[0].split()[-1:]:
@@ -40,7 +60,7 @@ def parse_mail(imap):
         {msg['to']}
         {msg['subject']}
         =======================================================================
-        ''')  ## TODO: Remove once finished
+        ''')  # TODO: Remove once finished
 
         # Prints email body
         if msg.is_multipart():
@@ -48,11 +68,16 @@ def parse_mail(imap):
                 if part.get_content_type() == 'text/plain':
                     obj = part.get_payload(decode=True)
                     parser = BytesParser()
-                    print(parser.parsebytes(obj))
-                    print(obj)  ## TODO: Parse better?
+                    body = parser.parsebytes(obj)
+                    print(obj)  # TODO: Parse better?
+
+    return body
 
 
 if __name__ == '__main__':
-    imap = connect_login(tvl_host, tvl_user, tvl_pass)
-    parse_mail(imap)
+    imap = connect_to_host(tvl_host, tvl_user, tvl_pass)
+    body = parse_mail(imap)
+    print(body)
+
+    # Logout of host
     imap.logout()
