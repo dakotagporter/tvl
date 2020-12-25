@@ -31,6 +31,9 @@
             </div>
             <button class="button is-block is-info is-large is-fullwidth">Login</button>
         </form>
+        <div class="field">
+            <small> Don't have an account? </small><a href="{{ url_for('auth.register') }}" style="color:blue;"><small>Register.</small></a>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TVL - Proteam</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
-    <img src="https://img1.wsimg.com/isteam/ip/0c321fc9-017b-4428-9f0e-5c8d8d2ab97b/TVL_Bar_With_Circle_Logo.jpg/:/rs=h:975,cg:true,m" alt="TVL" width="1472" height="156">
+    <a href="https://tvlitho.com/" target="_blank">
+      <img src="https://img1.wsimg.com/isteam/ip/0c321fc9-017b-4428-9f0e-5c8d8d2ab97b/TVL_Bar_With_Circle_Logo.jpg/:/rs=h:975,cg:true,m" alt="TVL" width="1472" height="156">
+    </a>
 </head>
 
 <body>
@@ -19,21 +21,17 @@
 
                     <div id="navbarMenuHeroA" class="navbar-menu">
                         <div class="navbar-end">
+                            {% if current_user.is_authenticated %}
                             <a href="{{ url_for('main.home') }}" class="navbar-item">
                                 Home
                             </a>
-                            <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                            <a href="{{ url_for('main.inventory') }}" class="navbar-item">
                                 Inventory
-                            </a>
-                            <a href="{{ url_for('auth.login') }}" class="navbar-item">
-                                Login
                             </a>
                             <a href="{{ url_for('auth.logout') }}" class="navbar-item">
                                 Logout
                             </a>
-                            <a href="{{ url_for('auth.register') }}" class="navbar-item">
-                                Register
-                            </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
