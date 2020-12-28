@@ -17,7 +17,6 @@ def create_app():
 
     app.config["SECRET_KEY"] = 'secret-key-goes-here'
     app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
-    # app.config[""] - track modifications
 
     DB.init_app(app)
 

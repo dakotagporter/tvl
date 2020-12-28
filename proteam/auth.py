@@ -1,5 +1,6 @@
 """User Authentication"""
 
+from os import getenv
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -38,9 +39,14 @@ def register():
 
 @auth.route('/register', methods=["POST"])
 def register_post():
+    access_key = request.form.get('access_key')
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
+
+    if not access_key == getenv("ACCESS_KEY"):
+        flash('Invalid Access Key')
+        return redirect(url_for('auth.register'))
 
     user = User.query.filter_by(email=email).first()
     if user:
