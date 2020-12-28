@@ -3,11 +3,17 @@
 ![TVL Logo](/assets/img/tvl.jfif)
 
 This repository contains all source code for the TVL - ProTeam web application.
+### Location
+website
 
 ## Purpose
 
 This web application provides functionality and ease of use to ordering capabilities and inventory changes for the TVL - Proteam account.
 
-## Use
+## Main Features
 
-User can register for a personal account granting them access to the Proteam inventory. 
+ - User can register for a personal account granting them access to the Proteam inventory. 
+ - User can update inventory manually.
+ - User can submit an order and inventory will be updated automatically using the given quantities and products.
+ 
+ 
