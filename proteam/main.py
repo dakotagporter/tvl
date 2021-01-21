@@ -19,7 +19,8 @@ def inventory():
     try:
         conn = sql.connect("./inv_db.sqlite3")
         cur = conn.cursor()
-        results = cur.execute("SELECT product_id, description FROM inventory").fetchall()
+        results = cur.execute(
+            "SELECT product_id, description FROM inventory").fetchall()
         for result in results:
             inv.append(f"{result[0]} - {result[1]}")
     except:
